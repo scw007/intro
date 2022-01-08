@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/binary"
 	"encoding/json"
-	"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -18,9 +17,6 @@ import (
 var sounds = map[string][][]byte{}
 
 func main() {
-	var token string
-	flag.StringVar(&token, "t", "", "Bot Token")
-	flag.Parse()
 
 	// load all the sounds
 	log.Print("loading sounds")
@@ -38,7 +34,7 @@ func main() {
 	}
 	// connect to discord
 	log.Print("joining discord")
-	discord, err := discordgo.New("Bot " + token)
+	discord, err := discordgo.New("Bot " + os.Getenv("TOKEN"))
 	if err != nil {
 		log.Fatal(err)
 	}
